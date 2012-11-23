@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/hourglass-select-remain.png</file>
+        <file>images/exclamation.png</file>
+        <file>images/information-octagon.png</file>
+        <file>images/ui-panel-resize.png</file>
+        <file>images/arrow.png</file>
+        <file>images/cross.png</file>
+        <file>images/tick.png</file>
+        <file>images/control-pause.png</file>
+    </qresource>
+</RCC>
