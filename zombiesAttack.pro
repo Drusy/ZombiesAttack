@@ -22,7 +22,8 @@ SOURCES += main.cpp\
     humanstrategy.cpp \
     zombiestrategy.cpp \
     hunterstrategy.cpp \
-    graphicsshot.cpp
+    graphicsshot.cpp \
+    hunterzombiestrategy.cpp
 
 HEADERS  += view.h \
     model.h \
@@ -33,9 +34,13 @@ HEADERS  += view.h \
     humanstrategy.h \
     zombiestrategy.h \
     hunterstrategy.h \
-    graphicsshot.h
+    graphicsshot.h \
+    hunterzombiestrategy.h
 
 FORMS    += view.ui
 
 RESOURCES += \
     resources.qrc
+
+OTHER_FILES += \
+    ideas.txt

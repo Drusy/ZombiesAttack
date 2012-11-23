@@ -106,7 +106,6 @@ void ZombieStrategy::execute(Agent *agent)
 {
     contaminates(agent);
 
-    qreal speed = agent->addSpeed((-50 + qrand() % 100) / 100.0);
     if (_humansSeen.isEmpty())
     {
         randomMovement(agent);

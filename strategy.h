@@ -14,7 +14,8 @@ enum StrategyEnum
 {
     human,
     hunter,
-    zombie
+    zombie,
+    hunterZombie
 };
 
 class Agent;

@@ -3,6 +3,7 @@
 #include "humanstrategy.h"
 #include "zombiestrategy.h"
 #include "hunterstrategy.h"
+#include "hunterzombiestrategy.h"
 
 #include <QDebug>
 #include <cmath>
@@ -16,6 +17,7 @@ Controller::Controller()
     HunterStrategy::instance()->moveToThread(this);
     HumanStrategy::instance()->moveToThread(this);
     ZombieStrategy::instance()->moveToThread(this);
+    HunterZombieStrategy::instance()->moveToThread(this);
 
     _view = new View(_model);
 

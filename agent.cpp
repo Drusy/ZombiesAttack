@@ -4,6 +4,7 @@
 #include "humanstrategy.h"
 #include "zombiestrategy.h"
 #include "hunterstrategy.h"
+#include "hunterzombiestrategy.h"
 
 #include <QDebug>
 #include <cmath>
@@ -43,6 +44,9 @@ void Agent::setStrategy(StrategyEnum strategy)
         break;
     case hunter:
         _strategy = HunterStrategy::instance();
+        break;
+    case hunterZombie:
+        _strategy = HunterZombieStrategy::instance();
         break;
     }
 }

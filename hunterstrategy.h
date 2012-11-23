@@ -90,6 +90,7 @@ protected:
        * Constructor
        */
     HunterStrategy();
+
     /// Instance of the singleton
     static HunterStrategy *_instance;
     /// The nearestZombie seen
