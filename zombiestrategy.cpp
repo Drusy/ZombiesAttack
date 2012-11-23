@@ -92,6 +92,16 @@ Agent* ZombieStrategy::nearestHuman(Agent *agent)
     return toFollow;
 }
 
+void ZombieStrategy::randomMovement(Agent *agent)
+{
+    qreal speed = agent->addSpeed((-50 + qrand() % 100) / 100.0);
+    qreal angle = agent->addAngle((qrand() % 100) / 500.0);
+    qreal dx = ::sin(angle) * 10;
+
+    agent->setRotation(agent->rotation() + dx);
+    agent->setMovement(QPointF(0, -(0 + sin(speed) * 1)));
+}
+
 void ZombieStrategy::execute(Agent *agent)
 {
     contaminates(agent);
@@ -99,24 +109,24 @@ void ZombieStrategy::execute(Agent *agent)
     qreal speed = agent->addSpeed((-50 + qrand() % 100) / 100.0);
     if (_humansSeen.isEmpty())
     {
-        // Random
-
-        qreal angle = agent->addAngle((qrand() % 100) / 500.0);
-        qreal dx = ::sin(angle) * 10;
-
-        agent->setRotation(agent->rotation() + dx);
-        agent->setMovement(QPointF(0, -(0 + sin(speed) * 1)));
+        randomMovement(agent);
     }
     else
     {
         // Follow
         Agent *toFollow = nearestHuman(agent);
-        double angle = atan2(agent->y() - toFollow->y(), agent->x() - toFollow->x()) * 180 / M_PI;
+        if(sqrt((toFollow->pos().x() - agent->pos().x())*(toFollow->pos().x() - agent->pos().x())
+                + (toFollow->pos().y() - agent->pos().y())*(toFollow->pos().y() - agent->pos().y())) < 75)
+        {
+            double angle = atan2(agent->y() - toFollow->y(), agent->x() - toFollow->x()) * 180 / M_PI;
 
-        agent->setRotation(angle + 90);
-        // Choose zombies stupid
-//        agent->setMovement(QPointF(0, sin(speed) * sin(speed) + 0.2));
-        // or choose zombies warrior
-        agent->setMovement(QPointF(0, 1));
+            agent->setRotation(angle + 90);
+            // Choose zombies stupid
+//            agent->setMovement(QPointF(0, sin(speed) * sin(speed) + 0.2));
+            // or choose zombies warrior
+            agent->setMovement(QPointF(0, 1));
+        }
+        else
+            randomMovement(agent);
     }
 }

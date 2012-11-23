@@ -41,12 +41,12 @@ void HunterStrategy::seeZombies(Agent *inAgent)
     {
         if (agent != inAgent)
         {
-            if (agent->isZombie() && collidesWithItem(inAgent, agent, 50))
+            if (agent->isZombie() && collidesWithItem(inAgent, agent, 80))
                 _zombies.push_back(agent);
             else
                 if (agent->isHunter())
                 {
-                    if (!collidesWithItem(inAgent, agent, 30))
+                    if (!collidesWithItem(inAgent, agent, 60))
                         _huntersFar.push_back(agent);
                 }
         }
@@ -55,7 +55,7 @@ void HunterStrategy::seeZombies(Agent *inAgent)
 
 bool HunterStrategy::collidesWithItem(const Agent *agent, const Agent *other, unsigned range) const
 {
-    double a = range * 2;
+    double a = range;
     double dx = agent->x() - other->x();
     double dy = agent->y() - other->y();
     return ((a * a) > (dx * dx + dy * dy));
@@ -102,6 +102,16 @@ Agent* HunterStrategy::nearestZombie(Agent *agent)
     return toFollow;
 }
 
+void HunterStrategy::randomMovement(Agent *agent)
+{
+    qreal speed = agent->addSpeed((-50 + qrand() % 100) / 100.0);
+    qreal angle = agent->addAngle((qrand() % 100) / 500.0);
+    qreal dx = ::sin(angle) * 10;
+
+    agent->setRotation(agent->rotation() + dx);
+    agent->setMovement(QPointF(0, -(0 + sin(speed) * 1)));
+}
+
 void HunterStrategy::execute(Agent *agent)
 {
     zombiesCollisions(agent);
@@ -110,21 +120,22 @@ void HunterStrategy::execute(Agent *agent)
     {
         if (_huntersFar.isEmpty())
         {
-            // Random
-            qreal speed = agent->addSpeed((-50 + qrand() % 100) / 100.0);
-            qreal angle = agent->addAngle((qrand() % 100) / 500.0);
-            qreal dx = ::sin(angle) * 10;
-
-            agent->setRotation(agent->rotation() + dx);
-            agent->setMovement(QPointF(0, -(0 + sin(speed) * 1)));
+            randomMovement(agent);
         }
         else
         {
             Agent *toFollow = _huntersFar.first();
-            double angle = atan2(agent->y() - toFollow->y(), agent->x() - toFollow->x()) * 180 / M_PI;
 
-            agent->setRotation(angle + 90);
-            agent->setMovement(QPointF(0, 1));
+            if(sqrt((toFollow->pos().x() - agent->pos().x()) * (toFollow->pos().x() - agent->pos().x())
+                    + (toFollow->pos().y() - agent->pos().y())*(toFollow->pos().y() - agent->pos().y())) < 125)
+            {
+                double angle = atan2(agent->y() - toFollow->y(), agent->x() - toFollow->x()) * 180 / M_PI;
+
+                agent->setRotation(angle + 90);
+                agent->setMovement(QPointF(0, 1));
+            }
+            else
+                randomMovement(agent);
         }
     }
     else

@@ -71,6 +71,12 @@ public:
        * @param The nearest human
        */
      Agent* nearestHuman(Agent *agent);
+     /**
+       * Random movement on zombie
+       *
+       * @param agent Agent executing the strategy
+       */
+     void randomMovement(Agent *agent);
 
 protected:
      /// Humans seen by the zombie

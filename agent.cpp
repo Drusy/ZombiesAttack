@@ -172,7 +172,7 @@ bool Agent::isHunter()
 
 void Agent::reload()
 {
-    _reload.start(1000);
+    _reload.start(500);
 }
 
 bool Agent::readyToShot()

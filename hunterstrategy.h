@@ -78,6 +78,12 @@ public:
        * @param zombie Zombie shot
        */
      void shot(Agent *hunter, Agent *zombie);
+     /**
+       * Random movement on hunter
+       *
+       * @param agent Agent executing the strategy
+       */
+     void randomMovement(Agent *agent);
 
 protected:
      /**
