@@ -36,6 +36,7 @@ void HunterStrategy::seeZombies(Agent *inAgent)
 {
     _zombies.clear();
     _huntersFar.clear();
+    _huntersNear.clear();
 
     foreach (Agent *agent, inAgent->getNeighbors())
     {
@@ -46,8 +47,10 @@ void HunterStrategy::seeZombies(Agent *inAgent)
             else
                 if (agent->isHunter())
                 {
-                    if (!collidesWithItem(inAgent, agent, 60))
+                    if (!collidesWithItem(inAgent, agent, 50))
                         _huntersFar.push_back(agent);
+                    else
+                        _huntersNear.push_back(agent);
                 }
         }
     }
@@ -102,6 +105,23 @@ Agent* HunterStrategy::nearestZombie(Agent *agent)
     return toFollow;
 }
 
+Agent* HunterStrategy::nearestFarhunter(Agent *agent)
+{
+    Agent *toFollow = 0;
+    double distance = INT_MAX, tmp;
+    foreach (Agent *hunter, _huntersFar)
+    {
+        tmp = distanceBetween(agent, hunter);
+        if (tmp < distance)
+        {
+            distance = tmp;
+            toFollow = hunter;
+        }
+    }
+
+    return toFollow;
+}
+
 void HunterStrategy::randomMovement(Agent *agent)
 {
     qreal speed = agent->addSpeed((-50 + qrand() % 100) / 100.0);
@@ -118,16 +138,16 @@ void HunterStrategy::execute(Agent *agent)
 
     if (_zombies.isEmpty())
     {
-        if (_huntersFar.isEmpty())
+        if (!_huntersNear.isEmpty())
         {
             randomMovement(agent);
         }
         else
         {
-            Agent *toFollow = _huntersFar.first();
+            Agent *toFollow = nearestFarhunter(agent);
 
             if(sqrt((toFollow->pos().x() - agent->pos().x()) * (toFollow->pos().x() - agent->pos().x())
-                    + (toFollow->pos().y() - agent->pos().y())*(toFollow->pos().y() - agent->pos().y())) < 125)
+                    + (toFollow->pos().y() - agent->pos().y())*(toFollow->pos().y() - agent->pos().y())) < 200)
             {
                 double angle = atan2(agent->y() - toFollow->y(), agent->x() - toFollow->x()) * 180 / M_PI;
 

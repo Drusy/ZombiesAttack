@@ -46,6 +46,13 @@ public:
       * Clear all the graphicals agents and clear the scene
       */
     void clear();
+    /**
+      * Remove corresponding agent from the view
+      *
+      * @param agent Agent to search
+      * @param removeAgent Tells if the view have to remove the agent from the scene or not
+      */
+    void removeAgent(Agent *agent, bool removeAgent = true);
 
 public slots:
     /**
@@ -70,9 +77,9 @@ public slots:
     void onZombieShot(Agent *hunter, Agent *zombie);
     /**
       * SLOT
-      * Shot animation over, remove the shot from the scene
+      * Agent contaminated by a zombie hunter
       */
-    void onShotOver(GraphicsShot *shot, GraphicsAgent *agent);
+    void onAgentContaminated(Agent *agent);
 
 signals:
     /**

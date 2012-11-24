@@ -102,6 +102,10 @@ public:
       */
     void kill();
     /**
+      * Contaminate by a hunter zombie shot
+      */
+    void contaminateByShot();
+    /**
       * Getter : _notMapped
       *
       * @return The relative movement of the next step
@@ -156,6 +160,12 @@ public:
       */
     bool isAlive();
     /**
+      * Tells if the agent is about to be contaminated
+      *
+      * @return True if the agent is contaminated, false otherwise
+      */
+    bool isAboutToBeContaminated();
+    /**
       * Getter : _index
       *
       * @return The index(id) of the agent
@@ -201,6 +211,10 @@ public:
       * @return The agent's neighbors vector
       */
     QVector<Agent*> getNeighbors() const;
+    /**
+      * Agent contaminated by zombie
+      */
+    void contamination();
 
 private:
     /// The agent's neighbors vector
@@ -219,6 +233,8 @@ private:
     qreal _angle;
     /// Timer for the agent death
     QTimer _deathTimer;
+    /// Timer for the contamination by shot
+    QTimer _contaminationTimer;
     /// Current speed
     qreal _speed;
     /// Index of the agent
@@ -235,6 +251,12 @@ signals:
       * @param agent The dead agent
       */
     void deadAgent(Agent *agent);
+    /**
+      * SIGNAL
+      * Tells to the controller that the agent is contaminated (by shot)
+      * @param agent The contaminated agent
+      */
+    void agentContaminated(Agent *agent);
 
 private slots:
     /**
@@ -242,6 +264,11 @@ private slots:
       * On death timer out
       */
     void onDeathTime();
+    /**
+      * SLOT
+      * On contamination timer out
+      */
+    void onContaminationTime();
 };
 
 /**

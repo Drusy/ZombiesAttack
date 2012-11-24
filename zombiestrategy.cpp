@@ -44,7 +44,7 @@ QVector<Agent*> ZombieStrategy::collidingHumans(Agent *inAgent)
 
     foreach (Agent *agent, inAgent->getNeighbors())
     {
-        if (agent != inAgent && !agent->isZombie())
+        if (agent != inAgent && !agent->isZombie() && !agent->isAboutToBeContaminated())
         {
             if(collidesWithItem(inAgent, agent))
                 humans.push_back(agent);
@@ -71,7 +71,7 @@ void ZombieStrategy::contaminates(Agent *agent)
 
     foreach (Agent *human, humans)
     {
-        human->changeStrategy(this);
+        human->contamination();
     }
 }
 
@@ -123,7 +123,7 @@ void ZombieStrategy::execute(Agent *agent)
             // Choose zombies stupid
 //            agent->setMovement(QPointF(0, sin(speed) * sin(speed) + 0.2));
             // or choose zombies warrior
-            agent->setMovement(QPointF(0, 1));
+            agent->setMovement(QPointF(0, 0.7));
         }
         else
             randomMovement(agent);

@@ -51,6 +51,13 @@ public:
        */
      Agent* nearestZombie(Agent *agent);
      /**
+       * Search the nearest far hunter seen
+       *
+       * @param agent The hunter
+       * @param The nearest far hunter
+       */
+     Agent* nearestFarhunter(Agent *agent);
+     /**
        * Check if the agent collides (see) with some zombie
        *
        * @param agent The hunter
@@ -99,6 +106,8 @@ protected:
     QVector<Agent*> _zombies;
     /// List of others hunters far from this
     QVector<Agent*> _huntersFar;
+    /// List of others hunters near from this
+    QVector<Agent*> _huntersNear;
 
 signals:
     /**

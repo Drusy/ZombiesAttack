@@ -4,8 +4,9 @@
 #include <QGraphicsItem>
 #include <QTimer>
 
-#include "graphicsagent.h"
 #include "agent.h"
+
+class GraphicsAgent;
 
 /**
   * @class GraphicsShot
@@ -47,23 +48,8 @@ protected:
     GraphicsAgent *_startItem;
     /// Zombie shot
     GraphicsAgent *_endItem;
-    /// Timer of the shot
-    QTimer _shotTimer;
 
-signals:
-    /**
-      * SIGNAL
-      * Tells to the view that the shot is over
-      */
-    void shotOver(GraphicsShot *, GraphicsAgent *);
-
-public slots:
-    /**
-      * SLOT
-      * Triggered on the shot timer is over
-      * Emit shotOver to the view
-      */
-    void onShotOver();
+    friend class View;
 };
 
 #endif // GRAPHICSSHOT_H

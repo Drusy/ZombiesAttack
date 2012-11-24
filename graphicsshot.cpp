@@ -1,4 +1,5 @@
 #include "graphicsshot.h"
+#include "graphicsagent.h"
 
 #include <QGraphicsScene>
 #include <QDebug>
@@ -9,10 +10,6 @@ GraphicsShot::GraphicsShot(QGraphicsScene *scene, GraphicsAgent *startItem, Grap
     _startItem(startItem),
     _endItem(endItem)
 {
-    _shotTimer.setSingleShot(false);
-    _shotTimer.start(600);
-
-    connect(&_shotTimer, SIGNAL(timeout()), this, SLOT(onShotOver()));
 }
 
 QRectF GraphicsShot::boundingRect() const
@@ -20,11 +17,6 @@ QRectF GraphicsShot::boundingRect() const
     return QRectF(line().p1(), QSizeF(line().p2().x() - line().p1().x(),
                                       line().p2().y() - line().p1().y()));
  }
-
-void GraphicsShot::onShotOver()
-{
-    emit shotOver(this, _endItem);
-}
 
 QPainterPath GraphicsShot::shape() const
 {
@@ -35,7 +27,7 @@ void GraphicsShot::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QW
 {
     QPen newPen = pen();
     newPen.setWidth(2);
-    newPen.setColor(Qt::gray);
+    newPen.setColor(_startItem->agent()->color());
     newPen.setStyle(Qt::DotLine);
 
     setLine(_startItem->x(), _startItem->y(),

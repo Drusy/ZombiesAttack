@@ -11,14 +11,6 @@
 Controller::Controller()
 {
     _model = new Model();
-
-    moveToThread(this);
-    _model->moveToThread(this);
-    HunterStrategy::instance()->moveToThread(this);
-    HumanStrategy::instance()->moveToThread(this);
-    ZombieStrategy::instance()->moveToThread(this);
-    HunterZombieStrategy::instance()->moveToThread(this);
-
     _view = new View(_model);
 
     QObject::connect(this,  SIGNAL(turnOver()), _view, SLOT(onTurnOver()));
@@ -26,8 +18,7 @@ Controller::Controller()
     QObject::connect(_view, SIGNAL(start(unsigned, unsigned, unsigned)), this, SLOT(onStart(unsigned, unsigned, unsigned)));
     QObject::connect(_view, SIGNAL(stop()), this, SLOT(onStop()));
     QObject::connect(HunterStrategy::instance(), SIGNAL(zombieShot(Agent*,Agent*)), _view, SLOT(onZombieShot(Agent*,Agent*)));
-
-    start();
+    QObject::connect(HunterZombieStrategy::instance(), SIGNAL(humanShot(Agent*,Agent*)), _view, SLOT(onZombieShot(Agent*,Agent*)));
 }
 
 void Controller::onStart(unsigned humans, unsigned zombies, unsigned hunters)
@@ -45,6 +36,7 @@ void Controller::create(unsigned number, StrategyEnum strategy)
     {
         agent = new Agent(strategy);
         connect(agent, SIGNAL(deadAgent(Agent*)), this, SLOT(onDeadAgent(Agent*)));
+        connect(agent, SIGNAL(agentContaminated(Agent*)), _view, SLOT(onAgentContaminated(Agent*)));
 
         _model->addAgent(agent);
         _view->createAgent(agent);
@@ -53,6 +45,7 @@ void Controller::create(unsigned number, StrategyEnum strategy)
 
 void Controller::onDeadAgent(Agent *agent)
 {
+    _view->removeAgent(agent);
     _model->removeAgent(agent);
 }
 
@@ -62,14 +55,8 @@ void Controller::onStop()
     _model->clear();
 }
 
-void Controller::run()
-{
-    exec();
-}
-
 Controller::~Controller()
 {
-    quit();
     delete _view;
     delete _model;
 }

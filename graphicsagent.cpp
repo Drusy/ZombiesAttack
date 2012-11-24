@@ -5,7 +5,7 @@
 #include <QPainter>
 
 GraphicsAgent::GraphicsAgent(QGraphicsScene *scene, Agent *agent)
-    : _scene(scene), _agent(agent)
+    : _scene(scene), _agent(agent), _shot(0)
 {
 }
 
@@ -39,4 +39,14 @@ void GraphicsAgent::paint(QPainter *painter, const QStyleOptionGraphicsItem *, Q
 Agent* GraphicsAgent::agent()
 {
     return _agent;
+}
+
+void GraphicsAgent::setShot(GraphicsShot *shot)
+{
+    _shot = shot;
+}
+
+GraphicsShot* GraphicsAgent::getShot() const
+{
+    return _shot;
 }

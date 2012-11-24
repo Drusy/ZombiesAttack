@@ -3,6 +3,7 @@
 #include "humanstrategy.h"
 #include "zombiestrategy.h"
 #include "hunterstrategy.h"
+#include "hunterzombiestrategy.h"
 
 #include <QGraphicsRectItem>
 #include <QDebug>
@@ -31,6 +32,7 @@ View::View(Model *model) :
     QObject::connect(HumanStrategy::instance(), SIGNAL(popChanged()), this, SLOT(onPopChanged()));
     QObject::connect(ZombieStrategy::instance(), SIGNAL(popChanged()), this, SLOT(onPopChanged()));
     QObject::connect(HunterStrategy::instance(), SIGNAL(popChanged()), this, SLOT(onPopChanged()));
+    QObject::connect(HunterZombieStrategy::instance(), SIGNAL(popChanged()), this, SLOT(onPopChanged()));
 
     _timer.setSingleShot(true);
     QObject::connect(&_timer, SIGNAL(timeout()), this, SLOT(onTimerOut()));
@@ -39,7 +41,8 @@ View::View(Model *model) :
 void View::onPopChanged()
 {
     ui->humansNumber->setText(QString::number(HumanStrategy::instance()->count()));
-    ui->zombiesNumber->setText(QString::number(ZombieStrategy::instance()->count()));
+    ui->zombiesNumber->setText(QString::number(ZombieStrategy::instance()->count()
+                                               + HunterZombieStrategy::instance()->count()));
     ui->huntersNumber->setText(QString::number(HunterStrategy::instance()->count()));
 }
 
@@ -158,22 +161,52 @@ void View::on_restartButton_clicked()
     ui->restartButton->setVisible(false);
 }
 
-void View::onShotOver(GraphicsShot *shot, GraphicsAgent *agent)
+void View::onAgentContaminated(Agent *agent)
 {
-    if (agent->scene())
-        _scene.removeItem(agent);
-//    delete agent;
+    removeAgent(agent, false);
+}
 
-    if (shot->scene())
-        _scene.removeItem(shot);
-    _shots.removeOne(shot);
-    delete shot;
+void View::removeAgent(Agent *agent, bool removeAgent)
+{
+    GraphicsAgent *graphicsAgent;
+    GraphicsShot *startShot;
+
+    foreach(GraphicsShot *shot, _shots)
+    {
+        graphicsAgent = shot->_endItem;
+        if (graphicsAgent && graphicsAgent->agent() == agent)
+        {
+            if (removeAgent)
+            {
+                if (graphicsAgent->scene() == &_scene)
+                    _scene.removeItem(graphicsAgent);
+
+                startShot = graphicsAgent->getShot();
+                if (startShot != 0)
+                {
+                    if (startShot->scene() == &_scene)
+                        _scene.removeItem(startShot);
+                    _shots.removeOne(startShot);
+                    delete startShot;
+                }
+            }
+
+            shot->_startItem->setShot(0);
+
+            if (shot->scene() == &_scene)
+                _scene.removeItem(shot);
+            _shots.removeOne(shot);
+            delete shot;
+
+            break;
+        }
+    }
 }
 
 void View::onZombieShot(Agent *hunter, Agent *zombie)
 {
     GraphicsShot *shot = new GraphicsShot(&_scene, _agents[hunter->index()], _agents[zombie->index()]);
-    connect(shot, SIGNAL(shotOver(GraphicsShot*, GraphicsAgent*)), this, SLOT(onShotOver(GraphicsShot*, GraphicsAgent*)));
+    _agents[hunter->index()]->setShot(shot);
 
     _shots.push_back(shot);
     _scene.addItem(shot);

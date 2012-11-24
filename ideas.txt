@@ -3,3 +3,4 @@
 > Bunkers
 > Chasseurs zombies
 > Gestion du patern composite
+> Settings manager 

@@ -5,6 +5,7 @@
 #include <QSize>
 
 #include "agent.h"
+#include "graphicsshot.h"
 
 /**
   * @class GraphicsAgent
@@ -37,19 +38,28 @@ public:
       */
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
                QWidget *widget);
-
     /**
       * Getter : _agent
       *
       * @return Corresponding agent
       */
     Agent* agent();
+    /**
+      * Setter : _shot
+      */
+    void setShot(GraphicsShot *shot);
+    /**
+      * Getter : _shot
+      */
+    GraphicsShot *getShot() const;
 
 protected:
     /// Scene of the view
     QGraphicsScene *_scene;
     /// Model agent
     Agent *_agent;
+    /// The agent shot
+    GraphicsShot *_shot;
 
 };
 

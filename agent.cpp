@@ -24,12 +24,17 @@ Agent::Agent(StrategyEnum strategy):
     _deathTimer.setSingleShot(true);
     connect(&_deathTimer, SIGNAL(timeout()), this, SLOT(onDeathTime()));
 
+    _contaminationTimer.setSingleShot(true);
+    connect(&_contaminationTimer, SIGNAL(timeout()), this, SLOT(onContaminationTime()));
+
     _reload.setSingleShot(true);  
 }
 
 Agent::~Agent()
 {
     _strategy->removeOne();
+    _deathTimer.stop();
+    _contaminationTimer.stop();
 }
 
 void Agent::setStrategy(StrategyEnum strategy)
@@ -56,15 +61,40 @@ void Agent::onDeathTime()
     emit deadAgent(this);
 }
 
+void Agent::onContaminationTime()
+{
+    emit agentContaminated(this);
+    contamination();
+}
+
+void Agent::contamination()
+{
+    if (_strategy == HunterStrategy::instance())
+        changeStrategy(HunterZombieStrategy::instance());
+    if (_strategy == HumanStrategy::instance())
+        changeStrategy(ZombieStrategy::instance());
+}
+
 bool Agent::isAlive()
 {
     return !_deathTimer.isActive();
 }
 
+bool Agent::isAboutToBeContaminated()
+{
+    return _contaminationTimer.isActive();
+}
+
 void Agent::kill()
 {
     if (!_deathTimer.isActive())
-        _deathTimer.start(800);
+        _deathTimer.start(500);
+}
+
+void Agent::contaminateByShot()
+{
+    if (!_contaminationTimer.isActive())
+        _contaminationTimer.start(500);
 }
 
 QRectF Agent::boundingRect() const
@@ -166,7 +196,8 @@ void Agent::resetIndex()
 
 bool Agent::isZombie()
 {
-    return (_strategy == ZombieStrategy::instance());
+    return (_strategy == ZombieStrategy::instance()
+            || _strategy == HunterZombieStrategy::instance());
 }
 
 bool Agent::isHunter()
@@ -176,7 +207,7 @@ bool Agent::isHunter()
 
 void Agent::reload()
 {
-    _reload.start(500);
+    _reload.start(600);
 }
 
 bool Agent::readyToShot()

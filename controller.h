@@ -13,7 +13,7 @@
   *
   * Controller of the MVC
   */
-class Controller : public QThread
+class Controller : public QObject
 {
     Q_OBJECT
 public:
@@ -26,10 +26,6 @@ public:
       */
     ~Controller();
 
-    /**
-      * @overload QThread::run()
-      */
-    void run();
     /**
       * Tells to the Model to create a new agent
       *
