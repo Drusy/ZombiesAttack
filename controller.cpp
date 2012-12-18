@@ -23,6 +23,8 @@ Controller::Controller()
 
 void Controller::onStart(unsigned humans, unsigned zombies, unsigned hunters)
 {
+//    create(200, human);
+//    create(5, hunterZombie);
     create(humans, human);
     create(zombies, zombie);
     create(hunters, hunter);
