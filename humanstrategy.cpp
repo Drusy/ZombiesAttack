@@ -44,7 +44,7 @@ QVector<Agent*> HumanStrategy::seeZombies(Agent *inAgent)
     return zombies;
 }
 
-bool HumanStrategy::collidesWithItem(const Agent *agent, const Agent *other) const
+bool HumanStrategy::collidesWithItem(Agent *agent, const Agent *other)
 {
     double a = 25 * 2;
     double dx = agent->x() - other->x();
@@ -66,6 +66,7 @@ QColor HumanStrategy::color() const
 
 void HumanStrategy::execute(Agent *agent)
 {
+    contactHuman(agent);
     // Random
     qreal speed = agent->addSpeed((-50 + qrand() % 100) / 100.0);
     qreal angle = agent->addAngle((qrand() % 100) / 500.0);
@@ -74,4 +75,34 @@ void HumanStrategy::execute(Agent *agent)
     agent->setRotation(agent->rotation() + dx);
     agent->setMovement(QPointF(0, -(0 + sin(speed) * 1)));
 
+}
+
+void HumanStrategy::contactHuman(Agent *agent)
+{
+    QVector<Agent*> humans = collidingHumans(agent);
+
+    foreach (Agent *human, humans)
+    {
+        if(human->isHuman())
+        {
+            agent->addCollision();
+        }
+
+    }
+}
+
+QVector<Agent*> HumanStrategy::collidingHumans(Agent *inAgent)
+{
+    QVector<Agent*> humans;
+
+    foreach (Agent *agent, inAgent->getNeighbors())
+    {
+        if (agent != inAgent && agent->isHuman())
+        {
+            if(collidesWithItem(inAgent, agent))
+                humans.push_back(agent);
+        }
+    }
+
+    return humans;
 }

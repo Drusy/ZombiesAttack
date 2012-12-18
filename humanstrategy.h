@@ -58,7 +58,7 @@ public:
        * @param other Second agent
        * @return True if the two items are colliding , false else
        */
-     bool collidesWithItem(const Agent *agent, const Agent *other) const;
+     bool collidesWithItem(Agent *agent, const Agent *other);
      /**
        * Check if the agent collides (see) with some zombie
        *
@@ -66,6 +66,20 @@ public:
        * @return The list of zombies seen
        */
      QVector<Agent*> seeZombies(Agent *inAgent);
+     /**
+       * Check if the agent collides with some other agents
+       *
+       * @param agent The human
+       */
+     void contactHuman(Agent *agent);
+     /**
+       * Check if the agent collides with some humans
+       *
+       * @param agent The human
+       * @return True if the zombie see humans, false else
+       */
+     QVector<Agent*> collidingHumans(Agent *inAgent);
+
 
 protected:
      /**

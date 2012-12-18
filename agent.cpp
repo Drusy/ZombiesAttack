@@ -5,6 +5,7 @@
 #include "zombiestrategy.h"
 #include "hunterstrategy.h"
 #include "hunterzombiestrategy.h"
+#include "humanbuilderstrategy.h"
 
 #include <QDebug>
 #include <cmath>
@@ -15,7 +16,8 @@ Agent::Agent(StrategyEnum strategy):
     _pos(QPoint(0, 0)),
     _rotation(0),
     _angle(0),
-    _speed(0)
+    _speed(0),
+    _collision(0)
 {
     _index = Index++;
     setStrategy(strategy);
@@ -28,6 +30,9 @@ Agent::Agent(StrategyEnum strategy):
     connect(&_contaminationTimer, SIGNAL(timeout()), this, SLOT(onContaminationTime()));
 
     _reload.setSingleShot(true);  
+
+    _buildTimer.setSingleShot(true);
+    connect(&_buildTimer, SIGNAL(timeout()), this, SLOT(onBuildTime()));
 }
 
 Agent::~Agent()
@@ -194,15 +199,20 @@ void Agent::resetIndex()
     Index = 0;
 }
 
-bool Agent::isZombie()
+bool Agent::isZombie() const
 {
     return (_strategy == ZombieStrategy::instance()
             || _strategy == HunterZombieStrategy::instance());
 }
 
-bool Agent::isHunter()
+bool Agent::isHunter() const
 {
     return (_strategy == HunterStrategy::instance());
+}
+
+bool Agent::isHuman() const
+{
+    return (_strategy == HumanStrategy::instance() || _strategy == HumanBuilderStrategy::instance());
 }
 
 void Agent::reload()
@@ -239,4 +249,28 @@ void Agent::setNeighbors(const QVector<Agent*> &neighbors)
 QVector<Agent*> Agent::getNeighbors() const
 {
     return _neighbors;
+}
+
+void Agent::addCollision()
+{
+    ++_collision;
+
+    if(_collision == NB_COLLISION_BUILDER)
+        _buildTimer.start(TIME_TO_BUILD);
+}
+
+void Agent::resetCollision()
+{
+    _collision = 0;
+}
+
+bool Agent::isBuilder()
+{
+    return (_collision >= NB_COLLISION_BUILDER);
+}
+
+void Agent::onBuildTime()
+{
+    qDebug()<< "changement de strategy";
+    changeStrategy(HumanBuilderStrategy::instance());
 }

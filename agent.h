@@ -10,6 +10,9 @@
 
 #include "strategy.h"
 
+#define NB_COLLISION_BUILDER 15000
+#define TIME_TO_BUILD 10000
+
 /**
   * @class Agent
   *
@@ -142,7 +145,7 @@ public:
       *
       * @return True if the agent is a Zombie, false else
       */
-    bool isZombie();
+    bool isZombie() const;
     /**
       * If the agent is a hunter, it reloads it's weapon
       */
@@ -186,7 +189,13 @@ public:
       *
       * @return True if the agent is a hunter, false else
       */
-    bool isHunter();
+    bool isHunter() const;
+    /**
+      * Tells if the agent is a human
+      *
+      * @return True if the agent is a human, false else
+      */
+    bool isHuman() const;
     /**
       * Setter : _neighborsIndex
       *
@@ -215,6 +224,18 @@ public:
       * Agent contaminated by zombie
       */
     void contamination();
+    /**
+      * Increment collision counter
+      */
+    void addCollision();
+    /**
+      * Refix collision to zero
+      */
+    void resetCollision();
+    /**
+      * Have capacity to build block
+      */
+    bool isBuilder();
 
 private:
     /// The agent's neighbors vector
@@ -243,7 +264,10 @@ private:
     static unsigned Index;
     /// Timer for the weapon reload
     QTimer _reload;
-
+    /// Numbers of collision with other humans (for Humans)
+    unsigned _collision;
+    /// Timer for the delay for create block
+    QTimer _buildTimer;
 signals:
     /**
       * SIGNAL
@@ -269,6 +293,11 @@ private slots:
       * On contamination timer out
       */
     void onContaminationTime();
+    /**
+      * SLOT
+      * On build timer out
+      */
+    void onBuildTime();
 };
 
 /**
