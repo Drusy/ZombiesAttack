@@ -44,9 +44,9 @@ QVector<Agent*> HumanStrategy::seeZombies(Agent *inAgent)
     return zombies;
 }
 
-bool HumanStrategy::collidesWithItem(Agent *agent, const Agent *other)
+bool HumanStrategy::collidesWithItem(Agent *agent, const Agent *other, int rayonCollision)
 {
-    double a = 25 * 2;
+    double a = rayonCollision * 2;
     double dx = agent->x() - other->x();
     double dy = agent->y() - other->y();
     return ((a * a) > (dx * dx + dy * dy));

@@ -23,25 +23,26 @@ Controller::Controller()
 
 void Controller::onStart(unsigned humans, unsigned zombies, unsigned hunters)
 {
-//    create(200, human);
-//    create(5, hunterZombie);
+//    create(2000, hunter);
+//    create(20, hunterZombie);
+    create(10, block);
     create(humans, human);
     create(zombies, zombie);
     create(hunters, hunter);
 }
 
-void Controller::create(unsigned number, StrategyEnum strategy)
+void Controller::create(unsigned number, StrategyEnum strategy, int x, int y)
 {
     Agent *agent;
 
     for (unsigned i = 0; i < number; ++i)
     {
-        agent = new Agent(strategy);
+        agent = new Agent(this, strategy);
         connect(agent, SIGNAL(deadAgent(Agent*)), this, SLOT(onDeadAgent(Agent*)));
         connect(agent, SIGNAL(agentContaminated(Agent*)), _view, SLOT(onAgentContaminated(Agent*)));
 
         _model->addAgent(agent);
-        _view->createAgent(agent);
+        _view->createAgent(agent, x, y);
     }
 }
 

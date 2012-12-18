@@ -6,13 +6,15 @@
 #include "hunterstrategy.h"
 #include "hunterzombiestrategy.h"
 #include "humanbuilderstrategy.h"
+#include "block.h"
 
 #include <QDebug>
 #include <cmath>
 
 unsigned Agent::Index = 0;
 
-Agent::Agent(StrategyEnum strategy):
+Agent::Agent(Controller *controller, StrategyEnum strategy):
+    _controller(controller),
     _pos(QPoint(0, 0)),
     _rotation(0),
     _angle(0),
@@ -57,6 +59,12 @@ void Agent::setStrategy(StrategyEnum strategy)
         break;
     case hunterZombie:
         _strategy = HunterZombieStrategy::instance();
+        break;
+    case humanBuilder:
+        _strategy = HumanBuilderStrategy::instance();
+        break;
+    case block:
+        _strategy = BlockStrategy::instance();
         break;
     }
 }
@@ -271,6 +279,21 @@ bool Agent::isBuilder()
 
 void Agent::onBuildTime()
 {
-    qDebug()<< "changement de strategy";
     changeStrategy(HumanBuilderStrategy::instance());
 }
+
+bool Agent::isBlock()
+{
+    return (_strategy == BlockStrategy::instance());
+}
+
+Controller* Agent::getController()
+{
+    return _controller;
+}
+
+QPointF Agent::getPosition()
+{
+    return _pos;
+}
+

@@ -10,6 +10,10 @@ protected:
     static HumanBuilderStrategy* _instance;
 public:
     static HumanBuilderStrategy* instance();
+    void contactBlock(Agent *agent);
+    Agent* collidingBlock(Agent *inAgent);
+    void execute(Agent *agent);
+    void buildBlock(Agent *agent);
 };
 
 #endif // HUMANBUILDERSTRATEGY_H

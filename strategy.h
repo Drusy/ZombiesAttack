@@ -15,7 +15,9 @@ enum StrategyEnum
     human,
     hunter,
     zombie,
-    hunterZombie
+    hunterZombie,
+    humanBuilder,
+    block
 };
 
 class Agent;

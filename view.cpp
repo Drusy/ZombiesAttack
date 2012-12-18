@@ -87,12 +87,14 @@ View::~View()
     delete ui;
 }
 
-void View::createAgent(Agent *agent)
+void View::createAgent(Agent *agent, int x, int y)
 {
     GraphicsAgent *graphicsAgent = new GraphicsAgent(&_scene, agent);
 
-    int x = qrand() % (unsigned)_scene.sceneRect().width();
-    int y = qrand() % (unsigned)_scene.sceneRect().height();
+    if(x == -1)
+        x = qrand() % (unsigned)_scene.sceneRect().width();
+    if(y == -1)
+        y = qrand() % (unsigned)_scene.sceneRect().height();
 
     graphicsAgent->setPos(x, y);
     agent->setPos(x, y);

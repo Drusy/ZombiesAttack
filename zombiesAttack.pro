@@ -24,7 +24,8 @@ SOURCES += main.cpp\
     hunterstrategy.cpp \
     graphicsshot.cpp \
     hunterzombiestrategy.cpp \
-    humanbuilderstrategy.cpp
+    humanbuilderstrategy.cpp \
+    block.cpp
 
 HEADERS  += view.h \
     model.h \
@@ -37,7 +38,8 @@ HEADERS  += view.h \
     hunterstrategy.h \
     graphicsshot.h \
     hunterzombiestrategy.h \
-    humanbuilderstrategy.h
+    humanbuilderstrategy.h \
+    block.h
 
 FORMS    += view.ui
 

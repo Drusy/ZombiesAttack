@@ -43,6 +43,15 @@ public:
       */
     void createAgent(Agent *agent);
     /**
+      * Create a new graphical agent and add it to the scene
+      *
+      * @param agent Model agent linked to the graphical agent
+      * @param x position x
+      * @param y position y
+      */
+    void createAgent(Agent *agent, int x, int y);
+
+    /**
       * Clear all the graphicals agents and clear the scene
       */
     void clear();

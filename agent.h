@@ -9,9 +9,12 @@
 #include <QTimer>
 
 #include "strategy.h"
+//#include "controller.h"
 
-#define NB_COLLISION_BUILDER 15000
-#define TIME_TO_BUILD 10000
+#define NB_COLLISION_BUILDER 1500
+#define TIME_TO_BUILD 1000
+
+class Controller;
 
 /**
   * @class Agent
@@ -29,7 +32,7 @@ public:
       * @param strategy The strategy of the agent
       * @see StrategyEnum
       */
-    Agent(StrategyEnum strategy);
+    Agent(Controller* controller, StrategyEnum strategy);
     /**
       * Destructor
       */
@@ -236,6 +239,16 @@ public:
       * Have capacity to build block
       */
     bool isBuilder();
+    /**
+      * Is a block
+      */
+    bool isBlock();
+    /**
+      * return the controller
+      */
+    Controller* getController();
+
+    QPointF getPosition();
 
 private:
     /// The agent's neighbors vector
@@ -268,6 +281,9 @@ private:
     unsigned _collision;
     /// Timer for the delay for create block
     QTimer _buildTimer;
+    /// Instance of the actual controller
+    Controller* _controller;
+
 signals:
     /**
       * SIGNAL

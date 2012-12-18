@@ -58,7 +58,7 @@ public:
        * @param other Second agent
        * @return True if the two items are colliding , false else
        */
-     bool collidesWithItem(Agent *agent, const Agent *other);
+     bool collidesWithItem(Agent *agent, const Agent *other, int rayonCollision = 25);
      /**
        * Check if the agent collides (see) with some zombie
        *

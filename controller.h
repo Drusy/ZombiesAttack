@@ -32,7 +32,7 @@ public:
       * @param number The number of entity to create
       * @param strategy The strategy of each agent
       */
-    void create(unsigned number, StrategyEnum strategy);
+    void create(unsigned number, StrategyEnum strategy, int x = -1, int y = -1);
     
 signals:
     /**
