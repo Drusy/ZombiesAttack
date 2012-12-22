@@ -25,14 +25,6 @@ public:
       * Destructor
       */
     ~Controller();
-
-    /**
-      * Tells to the Model to create a new agent
-      *
-      * @param number The number of entity to create
-      * @param strategy The strategy of each agent
-      */
-    void create(unsigned number, StrategyEnum strategy, int x = -1, int y = -1);
     
 signals:
     /**
@@ -76,6 +68,13 @@ public slots:
       * Next turn with only one cell
       */
     void nextTurnOneCell();
+    /**
+      * Tells to the Model to create a new agent
+      *
+      * @param number The number of entity to create
+      * @param strategy The strategy of each agent
+      */
+    void create(unsigned number, StrategyEnum strategy, int x = -1, int y = -1);
 
 private:
     /// Model of MVC

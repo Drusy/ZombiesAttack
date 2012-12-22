@@ -12,7 +12,10 @@
 //#include "controller.h"
 
 #define NB_COLLISION_BUILDER 1500
-#define TIME_TO_BUILD 1000
+#define TIME_TO_BUILD 10000
+#define PV_BLOCK 1000
+#define CHILDREN_PER_ECLOSION 4
+#define TIME_BEFORE_ECLOSION 50000
 
 class Controller;
 
@@ -32,7 +35,7 @@ public:
       * @param strategy The strategy of the agent
       * @see StrategyEnum
       */
-    Agent(Controller* controller, StrategyEnum strategy);
+    Agent(StrategyEnum strategy);
     /**
       * Destructor
       */
@@ -247,8 +250,14 @@ public:
       * return the controller
       */
     Controller* getController();
-
+    /**
+      * return the position of the agent
+      */
     QPointF getPosition();
+    /**
+      * Tells to the controller to create a new agent
+      */
+    void createAgent(unsigned number, StrategyEnum strategy, int x = -1, int y = -1);
 
 private:
     /// The agent's neighbors vector
@@ -269,6 +278,8 @@ private:
     QTimer _deathTimer;
     /// Timer for the contamination by shot
     QTimer _contaminationTimer;
+    /// Timer for the eclosion of block
+    QTimer _eclosionTimer;
     /// Current speed
     qreal _speed;
     /// Index of the agent
@@ -282,7 +293,9 @@ private:
     /// Timer for the delay for create block
     QTimer _buildTimer;
     /// Instance of the actual controller
-    Controller* _controller;
+//    Controller* _controller;
+    /// Resistance to attack
+    int _pv;
 
 signals:
     /**
@@ -297,6 +310,11 @@ signals:
       * @param agent The contaminated agent
       */
     void agentContaminated(Agent *agent);
+    /**
+      * SIGNAL
+      * Tells to the controller to create a new agent
+      */
+    void createAgentSig(unsigned number, StrategyEnum strategy, int x = -1, int y = -1);
 
 private slots:
     /**
@@ -314,6 +332,11 @@ private slots:
       * On build timer out
       */
     void onBuildTime();
+    /**
+      * SLOT
+      * On eclosion timer out
+      */
+    void onEclosionTime();
 };
 
 /**

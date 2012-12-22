@@ -73,6 +73,11 @@ public:
       */
     unsigned count();
 
+    /**
+      * @return The name of the strategy
+      */
+    virtual QString toString() = 0;
+
 protected:
     /// Color of the agent
     QColor _color;

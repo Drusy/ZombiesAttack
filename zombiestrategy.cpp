@@ -47,9 +47,13 @@ QVector<Agent*> ZombieStrategy::collidingHumans(Agent *inAgent)
         if (agent != inAgent && !agent->isZombie() && !agent->isAboutToBeContaminated())
         {
             if(collidesWithItem(inAgent, agent))
+            {
                 humans.push_back(agent);
+            }
             else
+            {
                 _humansSeen.push_back(agent);
+            }
         }
     }
 
@@ -104,8 +108,6 @@ void ZombieStrategy::randomMovement(Agent *agent)
 
 void ZombieStrategy::execute(Agent *agent)
 {
-    contaminates(agent);
-
     if (_humansSeen.isEmpty())
     {
         randomMovement(agent);
@@ -128,4 +130,10 @@ void ZombieStrategy::execute(Agent *agent)
         else
             randomMovement(agent);
     }
+    contaminates(agent);
+}
+
+QString ZombieStrategy::toString()
+{
+    return "ZombieStrategy";
 }

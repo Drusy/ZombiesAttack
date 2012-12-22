@@ -87,3 +87,8 @@ void HunterZombieStrategy::execute(Agent *agent)
         agent->setMovement(QPointF(0, 0.5));
     }
 }
+
+QString HunterZombieStrategy::toString()
+{
+    return "HunterZombieStrategy";
+}

@@ -5,7 +5,7 @@ BlockStrategy* BlockStrategy::_instance = 0;
 
 BlockStrategy::BlockStrategy()
 {
-    _color = Qt::darkGreen;
+    _color = Qt::darkMagenta;
 }
 
 BlockStrategy* BlockStrategy::instance()
@@ -34,4 +34,9 @@ void BlockStrategy::execute(Agent *agent)
 QColor BlockStrategy::color() const
 {
     return _color;
+}
+
+QString BlockStrategy::toString()
+{
+    return "BlockStrategy";
 }

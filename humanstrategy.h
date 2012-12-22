@@ -43,6 +43,11 @@ public:
        * @return The color of the agent
        */
      QColor color() const;
+     /**
+       * @return The name of the strategy
+       */
+     virtual QString toString();
+
 
      /**
        * Check if the agent collides (see) with some zombie

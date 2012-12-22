@@ -25,6 +25,11 @@ public:
      void humanCollisions(Agent *agent);
      void zombieShot(Agent *hunterZombie, Agent *human);
      Agent* nearestHuman(Agent *agent);
+     /**
+       * @return The name of the strategy
+       */
+     virtual QString toString();
+
 
 signals:
      void humanShot(Agent *hunterZombie, Agent *human);

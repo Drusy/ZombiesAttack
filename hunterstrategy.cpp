@@ -167,3 +167,9 @@ void HunterStrategy::execute(Agent *agent)
         agent->setMovement(QPointF(0, -0.5));
     }
 }
+
+QString HunterStrategy::toString()
+{
+    return "HunterStrategy";
+}
+

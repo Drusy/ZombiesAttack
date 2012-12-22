@@ -24,11 +24,10 @@ void HumanBuilderStrategy::contactBlock(Agent *agent)
 
     if(block != NULL)
     {
+        agent->setRotation(agent->rotation() + 90);
         buildBlock(agent);
     }
-
 }
-
 
 Agent* HumanBuilderStrategy::collidingBlock(Agent *inAgent)
 {
@@ -55,11 +54,22 @@ void HumanBuilderStrategy::execute(Agent *agent)
     agent->setRotation(agent->rotation() + dx);
     agent->setMovement(QPointF(0, -(0 + sin(speed) * 1)));
 
+    // 1 chance sur 1000
+    if(qrand() % 1000 == 42)
+    {
+        buildBlock(agent);
+    }
+
 }
 
 void HumanBuilderStrategy::buildBlock(Agent *agent)
 {
-    agent->getController()->create(1, block, agent->getPosition().x(), agent->getPosition().y());
+    agent->createAgent(1, block, agent->getPosition().x(), agent->getPosition().y());
     agent->changeStrategy(HumanStrategy::instance());
     agent->resetCollision();
+}
+
+QString HumanBuilderStrategy::toString()
+{
+    return "HumanBuilderStrategy";
 }

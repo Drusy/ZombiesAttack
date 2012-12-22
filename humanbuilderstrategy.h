@@ -14,6 +14,11 @@ public:
     Agent* collidingBlock(Agent *inAgent);
     void execute(Agent *agent);
     void buildBlock(Agent *agent);
+    /**
+      * @return The name of the strategy
+      */
+    virtual QString toString();
+
 };
 
 #endif // HUMANBUILDERSTRATEGY_H

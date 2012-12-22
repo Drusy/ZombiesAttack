@@ -106,3 +106,8 @@ QVector<Agent*> HumanStrategy::collidingHumans(Agent *inAgent)
 
     return humans;
 }
+
+QString HumanStrategy::toString()
+{
+    return "HumanStrategy";
+}

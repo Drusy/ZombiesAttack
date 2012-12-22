@@ -13,8 +13,7 @@
 
 unsigned Agent::Index = 0;
 
-Agent::Agent(Controller *controller, StrategyEnum strategy):
-    _controller(controller),
+Agent::Agent(StrategyEnum strategy):
     _pos(QPoint(0, 0)),
     _rotation(0),
     _angle(0),
@@ -31,10 +30,21 @@ Agent::Agent(Controller *controller, StrategyEnum strategy):
     _contaminationTimer.setSingleShot(true);
     connect(&_contaminationTimer, SIGNAL(timeout()), this, SLOT(onContaminationTime()));
 
-    _reload.setSingleShot(true);  
+    _reload.setSingleShot(true);
 
     _buildTimer.setSingleShot(true);
     connect(&_buildTimer, SIGNAL(timeout()), this, SLOT(onBuildTime()));
+
+    _eclosionTimer.setSingleShot(true);
+    connect(&_eclosionTimer, SIGNAL(timeout()), this, SLOT(onEclosionTime()));
+
+    if(strategy == block)
+    {
+        _pv = PV_BLOCK;
+        _eclosionTimer.start(TIME_BEFORE_ECLOSION);
+    }
+    else
+        _pv = 1;
 }
 
 Agent::~Agent()
@@ -76,16 +86,26 @@ void Agent::onDeathTime()
 
 void Agent::onContaminationTime()
 {
+    //    qDebug() << "contaminé";
     emit agentContaminated(this);
     contamination();
 }
 
 void Agent::contamination()
 {
+    //    qDebug() << _strategy->toString();
     if (_strategy == HunterStrategy::instance())
         changeStrategy(HunterZombieStrategy::instance());
-    if (_strategy == HumanStrategy::instance())
+    if (_strategy == HumanStrategy::instance() || _strategy == HumanBuilderStrategy::instance())
         changeStrategy(ZombieStrategy::instance());
+    if(_strategy == BlockStrategy::instance())
+    {
+        //        qDebug()<< "pv = " << _pv;
+        if(--_pv <= 0)
+        {
+            changeStrategy(ZombieStrategy::instance());
+        }
+    }
 }
 
 bool Agent::isAlive()
@@ -287,13 +307,21 @@ bool Agent::isBlock()
     return (_strategy == BlockStrategy::instance());
 }
 
-Controller* Agent::getController()
-{
-    return _controller;
-}
-
 QPointF Agent::getPosition()
 {
     return _pos;
+}
+
+void Agent::onEclosionTime()
+{
+    emit(createAgentSig(CHILDREN_PER_ECLOSION-1, human, getPosition().x(), getPosition().y()));
+
+    //une chance sur 100
+    changeStrategy(HunterStrategy::instance());
+}
+
+void Agent::createAgent(unsigned number, StrategyEnum strategy, int x , int y )
+{
+    emit(createAgentSig(number, strategy, x, y));
 }
 

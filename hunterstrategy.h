@@ -91,6 +91,11 @@ public:
        * @param agent Agent executing the strategy
        */
      void randomMovement(Agent *agent);
+     /**
+       * @return The name of the strategy
+       */
+     virtual QString toString();
+
 
 protected:
      /**

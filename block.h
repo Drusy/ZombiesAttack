@@ -23,7 +23,7 @@ public:
 
     void execute(Agent *agent);
     QColor color() const;
-
+    virtual QString toString();
 };
 
 #endif // BLOCK_H
