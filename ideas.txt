@@ -1,6 +1,4 @@
 > Pool [Both]
 > QUnit [Both]
-> Mettre a jour les compteurs [Kevin]
-> Mersenn Twister [Florian]
 > UML [Both]
 > Rapport [Both]
