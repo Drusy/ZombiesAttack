@@ -21,7 +21,7 @@ public:
       */
     QPainterPath shape() const;
 
-    void execute(Agent *agent);
+    void execute(Agent*);
     QColor color() const;
     virtual QString toString();
 };

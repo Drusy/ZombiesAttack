@@ -1,6 +1,6 @@
-> Contagion à retardement
-> Construction de batiments
-> Bunkers
-> Chasseurs zombies
+> Pool
 > Gestion du patern composite
-> Settings manager 
+> Mettre à jour les compteurs
+> Mersenn Twister
+> UML 
+> Rapport 

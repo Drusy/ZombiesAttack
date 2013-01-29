@@ -26,7 +26,7 @@ QPainterPath BlockStrategy::shape() const
     return path;
 }
 
-void BlockStrategy::execute(Agent *agent)
+void BlockStrategy::execute(Agent *)
 {
 
 }
