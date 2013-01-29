@@ -5,8 +5,6 @@
 #include <QPainterPath>
 #include <QColor>
 
-#define PI 3,14159265
-
 /**
   * @enum StrategyEnum
   *

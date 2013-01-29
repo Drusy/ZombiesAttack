@@ -1,5 +1,4 @@
 #include "zombiestrategy.h"
-#include "MersenneTwister.h"
 
 #include <QStyleOption>
 #include <QDebug>
@@ -99,8 +98,8 @@ Agent* ZombieStrategy::nearestHuman(Agent *agent)
 
 void ZombieStrategy::randomMovement(Agent *agent)
 {
-    qreal speed = agent->addSpeed((-50 + genrand_int32() % 100) / 100.0);
-    qreal angle = agent->addAngle((genrand_int32() % 100) / 500.0);
+    qreal speed = agent->addSpeed((-50 + qrand() % 100) / 100.0);
+    qreal angle = agent->addAngle((qrand() % 100) / 500.0);
     qreal dx = ::sin(angle) * 10;
 
     agent->setRotation(agent->rotation() + dx);
@@ -120,9 +119,7 @@ void ZombieStrategy::execute(Agent *agent)
         if(sqrt((toFollow->pos().x() - agent->pos().x())*(toFollow->pos().x() - agent->pos().x())
                 + (toFollow->pos().y() - agent->pos().y())*(toFollow->pos().y() - agent->pos().y())) < 75)
         {
-            /*DEBUG_MSVC*/
-//            double angle = atan2((double)(agent->y() - toFollow->y()),(double)(agent->x() - toFollow->x())) * (180 / PI);
-            double angle = atan2((agent->y() - toFollow->y()),(agent->x() - toFollow->x())) * (180 / PI);
+            double angle = atan2(agent->y() - toFollow->y(), agent->x() - toFollow->x()) * 180 / M_PI;
 
             agent->setRotation(angle + 90);
             // Choose zombies stupid
