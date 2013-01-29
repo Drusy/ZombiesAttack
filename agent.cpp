@@ -255,8 +255,11 @@ bool Agent::readyToShot()
 
 double distanceBetween(Agent *a1, Agent *a2)
 {
-    return sqrt((a1->x() - a2->x()) * (a1->x() - a2->x()) +
-                (a1->y() - a2->y()) * (a1->y() - a2->y()));
+    /*DEBUG_MSVC*/
+//    return sqrt((double)((a1->x() - a2->x()) * (a1->x() - a2->x())) +
+//                (double)((a1->y() - a2->y()) * (a1->y() - a2->y())));
+    return sqrt(((a1->x() - a2->x()) * (a1->x() - a2->x())) +
+                ((a1->y() - a2->y()) * (a1->y() - a2->y())));
 }
 
 void Agent::setNeighborsIndex(unsigned neighborsIndex)
