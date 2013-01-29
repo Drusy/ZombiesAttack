@@ -1,6 +1,6 @@
 > Pool
-> Gestion du patern composite
+> QUnit
 > Mettre à jour les compteurs
 > Mersenn Twister
 > UML 
-> Rapport 
+> Rapport
