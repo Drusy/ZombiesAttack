@@ -9,7 +9,7 @@ QT       += core gui opengl
 TARGET = zombiesAttack
 TEMPLATE = app
 
-QMAKE_CXXFLAGS = -Wall
+#QMAKE_CXXFLAGS = -Wall
 
 
 SOURCES += main.cpp\
@@ -25,7 +25,8 @@ SOURCES += main.cpp\
     graphicsshot.cpp \
     hunterzombiestrategy.cpp \
     humanbuilderstrategy.cpp \
-    block.cpp
+    block.cpp \
+    MersenneTwister.cpp
 
 HEADERS  += view.h \
     model.h \
@@ -39,7 +40,8 @@ HEADERS  += view.h \
     graphicsshot.h \
     hunterzombiestrategy.h \
     humanbuilderstrategy.h \
-    block.h
+    block.h \
+    MersenneTwister.h
 
 FORMS    += view.ui
 

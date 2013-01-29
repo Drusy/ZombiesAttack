@@ -1,4 +1,5 @@
 #include "humanbuilderstrategy.h"
+#include "MersenneTwister.h"
 
 #include <QStyleOption>
 #include <cmath>
@@ -47,15 +48,15 @@ void HumanBuilderStrategy::execute(Agent *agent)
 {
     contactBlock(agent);
     // Random
-    qreal speed = agent->addSpeed((-50 + qrand() % 100) / 100.0);
-    qreal angle = agent->addAngle((qrand() % 100) / 500.0);
+    qreal speed = agent->addSpeed((-50 + (genrand_int32() % 100)) / 100.0);
+    qreal angle = agent->addAngle((genrand_int32() % 100) / 500.0);
     qreal dx = ::sin(angle) * 10;
 
     agent->setRotation(agent->rotation() + dx);
     agent->setMovement(QPointF(0, -(0 + sin(speed) * 1)));
 
     // 1 chance sur 1000
-    if(qrand() % 1000 == 42)
+    if(genrand_int32() % 1000 == 42)
     {
         buildBlock(agent);
     }

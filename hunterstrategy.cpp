@@ -1,4 +1,5 @@
 #include "hunterstrategy.h"
+#include "MersenneTwister.h"
 
 #include <QStyleOption>
 #include <QDebug>
@@ -70,7 +71,7 @@ void HunterStrategy::zombiesCollisions(Agent *agent)
     _nearestZombie = nearestZombie(agent);
 
     if (!_zombies.empty())
-        shot(agent, _nearestZombie /*_zombies.at(qrand() % _zombies.size())*/);
+        shot(agent, _nearestZombie /*_zombies.at(genrand_int32() % _zombies.size())*/);
 }
 
 QColor HunterStrategy::color() const
@@ -124,8 +125,8 @@ Agent* HunterStrategy::nearestFarhunter(Agent *agent)
 
 void HunterStrategy::randomMovement(Agent *agent)
 {
-    qreal speed = agent->addSpeed((-50 + qrand() % 100) / 100.0);
-    qreal angle = agent->addAngle((qrand() % 100) / 500.0);
+    qreal speed = agent->addSpeed((-50 + genrand_int32() % 100) / 100.0);
+    qreal angle = agent->addAngle((genrand_int32() % 100) / 500.0);
     qreal dx = ::sin(angle) * 10;
 
     agent->setRotation(agent->rotation() + dx);
@@ -149,7 +150,9 @@ void HunterStrategy::execute(Agent *agent)
             if(sqrt((toFollow->pos().x() - agent->pos().x()) * (toFollow->pos().x() - agent->pos().x())
                     + (toFollow->pos().y() - agent->pos().y())*(toFollow->pos().y() - agent->pos().y())) < 200)
             {
-                double angle = atan2(agent->y() - toFollow->y(), agent->x() - toFollow->x()) * 180 / M_PI;
+                /*DEBUG_MSVC*/
+//                double angle = atan2((double)(agent->y() - toFollow->y()), (double)(agent->x() - toFollow->x())) * (180 / PI);
+                double angle = atan2((agent->y() - toFollow->y()), (agent->x() - toFollow->x())) * (180 / PI);
 
                 agent->setRotation(angle + 90);
                 agent->setMovement(QPointF(0, 1));
@@ -161,7 +164,9 @@ void HunterStrategy::execute(Agent *agent)
     else
     {
         // Run
-        double angle = atan2(agent->y() - _nearestZombie->y(), agent->x() - _nearestZombie->x()) * 180 / M_PI;
+        /*DEBUG_MSVC*/
+//        double angle = atan2((double)(agent->y() - _nearestZombie->y()), (double)(agent->x() - _nearestZombie->x())) * (180 / PI);
+        double angle = atan2((agent->y() - _nearestZombie->y()), (agent->x() - _nearestZombie->x())) * (180 / PI);
 
         agent->setRotation(angle + 90);
         agent->setMovement(QPointF(0, -0.5));
