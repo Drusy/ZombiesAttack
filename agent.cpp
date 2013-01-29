@@ -314,14 +314,13 @@ QPointF Agent::getPosition()
 
 void Agent::onEclosionTime()
 {
-    emit(createAgentSig(CHILDREN_PER_ECLOSION-1, human, getPosition().x(), getPosition().y()));
+    emit createAgentSig(CHILDREN_PER_ECLOSION - 1, human, getPosition().x(), getPosition().y());
 
-    //une chance sur 100
     changeStrategy(HunterStrategy::instance());
 }
 
 void Agent::createAgent(unsigned number, StrategyEnum strategy, int x , int y )
 {
-    emit(createAgentSig(number, strategy, x, y));
+    emit createAgentSig(number, strategy, x, y);
 }
 

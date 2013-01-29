@@ -39,10 +39,9 @@ void Controller::create(unsigned number, StrategyEnum strategy, int x, int y)
     for (unsigned i = 0; i < number; ++i)
     {
         agent = new Agent(strategy);
+
         connect(agent, SIGNAL(deadAgent(Agent*)), this, SLOT(onDeadAgent(Agent*)));
         connect(agent, SIGNAL(agentContaminated(Agent*)), _view, SLOT(onAgentContaminated(Agent*)));
-
-//        if(strategy == block)
         connect(agent, SIGNAL(createAgentSig(uint,StrategyEnum,int,int)), this, SLOT(create(uint,StrategyEnum,int,int)));
 
         _model->addAgent(agent);

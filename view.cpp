@@ -4,6 +4,7 @@
 #include "zombiestrategy.h"
 #include "hunterstrategy.h"
 #include "hunterzombiestrategy.h"
+#include "humanbuilderstrategy.h"
 
 #include <QGraphicsRectItem>
 #include <QDebug>
@@ -40,7 +41,8 @@ View::View(Model *model) :
 
 void View::onPopChanged()
 {
-    ui->humansNumber->setText(QString::number(HumanStrategy::instance()->count()));
+    ui->humansNumber->setText(QString::number(HumanStrategy::instance()->count()
+                                              + HumanBuilderStrategy::instance()->count()));
     ui->zombiesNumber->setText(QString::number(ZombieStrategy::instance()->count()
                                                + HunterZombieStrategy::instance()->count()));
     ui->huntersNumber->setText(QString::number(HunterStrategy::instance()->count()));
