@@ -23,6 +23,7 @@ Controller::Controller()
 
 void Controller::onStart(unsigned humans, unsigned zombies, unsigned hunters)
 {
+    Agent::resetIndex();
 //    create(300, hunter);
 //    create(2, hunterZombie);
 //    create(50, zombie);

@@ -86,7 +86,6 @@ void Agent::onDeathTime()
 
 void Agent::onContaminationTime()
 {
-    //    qDebug() << "contaminé";
     emit agentContaminated(this);
     contamination();
 }

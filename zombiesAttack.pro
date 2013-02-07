@@ -4,13 +4,12 @@
 #
 #-------------------------------------------------
 
-QT       += core gui opengl
+QT       += core gui testlib
 
 TARGET = zombiesAttack
 TEMPLATE = app
 
 QMAKE_CXXFLAGS = -Wall
-
 
 SOURCES += main.cpp\
         view.cpp \
@@ -25,7 +24,9 @@ SOURCES += main.cpp\
     graphicsshot.cpp \
     hunterzombiestrategy.cpp \
     humanbuilderstrategy.cpp \
-    block.cpp
+    block.cpp \
+    tests/agenttest.cpp \
+    tests/modeltest.cpp
 
 HEADERS  += view.h \
     model.h \
@@ -39,7 +40,10 @@ HEADERS  += view.h \
     graphicsshot.h \
     hunterzombiestrategy.h \
     humanbuilderstrategy.h \
-    block.h
+    block.h \
+    tests/autotest.h \
+    tests/agenttest.h \
+    tests/modeltest.h
 
 FORMS    += view.ui
 

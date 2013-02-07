@@ -8,8 +8,6 @@
 
 #include <QGraphicsRectItem>
 #include <QDebug>
-#include <QGLWidget>
-#include <QGLFormat>
 #include <QResizeEvent>
 
 View::View(Model *model) :

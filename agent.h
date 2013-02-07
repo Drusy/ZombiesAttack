@@ -246,10 +246,16 @@ public:
       * Is a block
       */
     bool isBlock();
+    /// Getter : _pv
+    int getPV() {return _pv;}
     /**
       * return the controller
       */
     Controller* getController();
+    /**
+      * Getter : _strategy
+      */
+    Strategy* getStrategy() {return _strategy;}
     /**
       * return the position of the agent
       */
