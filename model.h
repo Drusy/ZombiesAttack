@@ -4,7 +4,7 @@
 #include <QObject>
 #include <QList>
 #include <QSize>
-#include <QGraphicsScene>
+#include <QtWidgets/QGraphicsScene>
 #include <QMap>
 
 #include "graphicsagent.h"

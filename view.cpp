@@ -6,7 +6,7 @@
 #include "hunterzombiestrategy.h"
 #include "humanbuilderstrategy.h"
 
-#include <QGraphicsRectItem>
+#include <QtWidgets/QGraphicsRectItem>
 #include <QDebug>
 #include <QResizeEvent>
 

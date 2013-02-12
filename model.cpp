@@ -1,4 +1,5 @@
 #include "model.h"
+#include "poolagent.h"
 
 QRect Model::_border = QRect(0, 0, 0, 0);
 
@@ -15,7 +16,8 @@ void Model::clear()
 {
     foreach(Agent *agent, _agents)
     {
-        delete agent;
+        PoolAgent::instance()->deleteAgent(agent);
+        //delete agent;
     }
     _agents.clear();
 }
@@ -23,7 +25,8 @@ void Model::clear()
 void Model::removeAgent(Agent *agent)
 {
     _agents.removeOne(agent);
-    delete agent;
+    PoolAgent::instance()->deleteAgent(agent);
+    //delete agent;
     agent = 0;
 }
 

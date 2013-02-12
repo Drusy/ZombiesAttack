@@ -1,7 +1,7 @@
 #ifndef GRAPHICSSHOT_H
 #define GRAPHICSSHOT_H
 
-#include <QGraphicsItem>
+#include <QtWidgets/QGraphicsItem>
 #include <QTimer>
 
 #include "agent.h"

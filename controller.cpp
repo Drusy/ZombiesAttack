@@ -4,6 +4,7 @@
 #include "zombiestrategy.h"
 #include "hunterstrategy.h"
 #include "hunterzombiestrategy.h"
+#include "poolagent.h"
 
 #include <QDebug>
 #include <cmath>
@@ -39,7 +40,11 @@ void Controller::create(unsigned number, StrategyEnum strategy, int x, int y)
 
     for (unsigned i = 0; i < number; ++i)
     {
-        agent = new Agent(strategy);
+        //agent = new Agent(strategy);
+        agent = PoolAgent::instance(POOL_SIZE)->newAgent(strategy);
+
+        //use of a pool
+
 
         connect(agent, SIGNAL(deadAgent(Agent*)), this, SLOT(onDeadAgent(Agent*)));
         connect(agent, SIGNAL(agentContaminated(Agent*)), _view, SLOT(onAgentContaminated(Agent*)));

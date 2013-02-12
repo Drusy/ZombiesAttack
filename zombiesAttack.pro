@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui testlib
+QT       += core gui testlib declarative
 
 TARGET = zombiesAttack
 TEMPLATE = app
@@ -26,7 +26,8 @@ SOURCES += main.cpp\
     humanbuilderstrategy.cpp \
     block.cpp \
     tests/agenttest.cpp \
-    tests/modeltest.cpp
+    tests/modeltest.cpp \
+    poolagent.cpp
 
 HEADERS  += view.h \
     model.h \
@@ -43,7 +44,8 @@ HEADERS  += view.h \
     block.h \
     tests/autotest.h \
     tests/agenttest.h \
-    tests/modeltest.h
+    tests/modeltest.h \
+    poolagent.h
 
 FORMS    += view.ui
 

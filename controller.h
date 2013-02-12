@@ -8,6 +8,8 @@
 #include "view.h"
 #include "strategy.h"
 
+#define POOL_SIZE 90
+
 /**
   * @class Controller
   *

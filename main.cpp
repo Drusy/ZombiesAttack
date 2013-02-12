@@ -1,4 +1,4 @@
-#include <QApplication>
+#include <QtWidgets/QApplication>
 #include <QDebug>
 
 #include "tests/autotest.h"

@@ -47,6 +47,55 @@ Agent::Agent(StrategyEnum strategy):
         _pv = 1;
 }
 
+Agent::Agent():
+    _pos(QPoint(0, 0)),
+    _rotation(0),
+    _angle(0),
+    _speed(0),
+    _collision(0)
+{
+    _strategy = NULL;
+}
+
+void Agent::init(StrategyEnum strategy)
+{
+    _rotation = 0;
+    _angle = 0;
+    _speed = 0;
+    _collision = 0;
+
+    _index = Index++;
+    if(_strategy != NULL)
+    {
+        _strategy->removeOne();
+    }
+    setStrategy(strategy);
+    _strategy->addOne();
+
+    _deathTimer.setSingleShot(true);
+    connect(&_deathTimer, SIGNAL(timeout()), this, SLOT(onDeathTime()));
+
+    _contaminationTimer.setSingleShot(true);
+    connect(&_contaminationTimer, SIGNAL(timeout()), this, SLOT(onContaminationTime()));
+
+    _reload.setSingleShot(true);
+
+    _buildTimer.setSingleShot(true);
+    connect(&_buildTimer, SIGNAL(timeout()), this, SLOT(onBuildTime()));
+
+    _eclosionTimer.setSingleShot(true);
+    connect(&_eclosionTimer, SIGNAL(timeout()), this, SLOT(onEclosionTime()));
+
+    if(strategy == block)
+    {
+        _notMapped = QPoint(0,0);
+        _pv = PV_BLOCK;
+        _eclosionTimer.start(TIME_BEFORE_ECLOSION);
+    }
+    else
+        _pv = 1;
+}
+
 Agent::~Agent()
 {
     _strategy->removeOne();

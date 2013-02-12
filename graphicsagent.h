@@ -1,7 +1,7 @@
 #ifndef QGRAPHICSAGENT_H
 #define QGRAPHICSAGENT_H
 
-#include <QGraphicsItem>
+#include <QtWidgets/QGraphicsItem>
 #include <QSize>
 
 #include "agent.h"

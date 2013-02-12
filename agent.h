@@ -4,7 +4,7 @@
 #include <QPoint>
 #include <QColor>
 #include <QPainterPath>
-#include <QGraphicsScene>
+#include <QtWidgets/QGraphicsScene>
 #include <QRectF>
 #include <QTimer>
 
@@ -29,6 +29,8 @@ class Agent : public QObject
 {
     Q_OBJECT
 public:
+    Agent();
+    void init(StrategyEnum strategy);
     /**
       * Constructor
       *
