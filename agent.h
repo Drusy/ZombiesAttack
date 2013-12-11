@@ -4,7 +4,7 @@
 #include <QPoint>
 #include <QColor>
 #include <QPainterPath>
-#include <QtWidgets/QGraphicsScene>
+#include <QGraphicsScene>
 #include <QRectF>
 #include <QTimer>
 

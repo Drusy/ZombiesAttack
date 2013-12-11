@@ -3,7 +3,7 @@
 
 #include <QList>
 
-#include <agent.h>
+#include "agent.h"
 
 class PoolAgent
 {

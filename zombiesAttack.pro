@@ -4,12 +4,12 @@
 #
 #-------------------------------------------------
 
-QT       += core gui testlib declarative
+QT       += core gui testlib declarative widgets
 
 TARGET = zombiesAttack
 TEMPLATE = app
 
-QMAKE_CXXFLAGS = -Wall
+QMAKE_CXXFLAGS = -D_USE_MATH_DEFINES
 
 SOURCES += main.cpp\
         view.cpp \

@@ -81,7 +81,7 @@ void HunterZombieStrategy::execute(Agent *agent)
     else
     {
         // Run
-        double angle = atan2(agent->y() - _nearestHuman->y(), agent->x() - _nearestHuman->x()) * 180 / M_PI;
+        double angle = atan2((float)agent->y() - _nearestHuman->y(), (float)agent->x() - _nearestHuman->x()) * 180 / M_PI;
 
         agent->setRotation(angle + 90);
         agent->setMovement(QPointF(0, 0.5));

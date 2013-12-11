@@ -150,7 +150,7 @@ void HunterStrategy::execute(Agent *agent)
             else if(sqrt((toFollow->pos().x() - agent->pos().x()) * (toFollow->pos().x() - agent->pos().x())
                     + (toFollow->pos().y() - agent->pos().y())*(toFollow->pos().y() - agent->pos().y())) < 200)
             {
-                double angle = atan2(agent->y() - toFollow->y(), agent->x() - toFollow->x()) * 180 / M_PI;
+                double angle = atan2((float)agent->y() - toFollow->y(), (float)agent->x() - toFollow->x()) * 180 / M_PI;
 
                 agent->setRotation(angle + 90);
                 agent->setMovement(QPointF(0, 1));
@@ -162,7 +162,7 @@ void HunterStrategy::execute(Agent *agent)
     else
     {
         // Run
-        double angle = atan2(agent->y() - _nearestZombie->y(), agent->x() - _nearestZombie->x()) * 180 / M_PI;
+        double angle = atan2((float)agent->y() - _nearestZombie->y(), (float)agent->x() - _nearestZombie->x()) * 180 / M_PI;
 
         agent->setRotation(angle + 90);
         agent->setMovement(QPointF(0, -0.5));

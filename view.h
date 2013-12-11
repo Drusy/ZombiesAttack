@@ -1,10 +1,10 @@
 #ifndef VIEW_H
 #define VIEW_H
 
-#include <QtWidgets/QMainWindow>
+#include <QMainWindow>
 #include <QVector>
-#include <QtWidgets/QGraphicsView>
-#include <QtWidgets/QGraphicsItem>
+#include <QGraphicsView>
+#include <QGraphicsItem>
 #include <QTimer>
 
 #include "model.h"

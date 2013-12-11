@@ -119,7 +119,7 @@ void ZombieStrategy::execute(Agent *agent)
         if(sqrt((toFollow->pos().x() - agent->pos().x())*(toFollow->pos().x() - agent->pos().x())
                 + (toFollow->pos().y() - agent->pos().y())*(toFollow->pos().y() - agent->pos().y())) < 75)
         {
-            double angle = atan2(agent->y() - toFollow->y(), agent->x() - toFollow->x()) * 180 / M_PI;
+            double angle = atan2((float)agent->y() - toFollow->y(), (float)agent->x() - toFollow->x()) * 180 / M_PI;
 
             agent->setRotation(angle + 90);
             // Choose zombies stupid

@@ -303,7 +303,7 @@ bool Agent::readyToShot()
 
 double distanceBetween(Agent *a1, Agent *a2)
 {
-    return sqrt((a1->x() - a2->x()) * (a1->x() - a2->x()) +
+    return sqrt((float)(a1->x() - a2->x()) * (a1->x() - a2->x()) +
                 (a1->y() - a2->y()) * (a1->y() - a2->y()));
 }
 
