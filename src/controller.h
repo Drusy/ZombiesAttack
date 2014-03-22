@@ -6,7 +6,7 @@
 #include <QVector>
 #include "model.h"
 #include "view.h"
-#include "strategy.h"
+#include "strategy/strategy.h"
 
 #define POOL_SIZE 90
 

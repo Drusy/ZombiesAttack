@@ -3,7 +3,7 @@
 #include <QStyleOption>
 #include <cmath>
 
-#include "controller.h"
+#include "../controller.h"
 
 
 HumanBuilderStrategy* HumanBuilderStrategy::_instance = 0;

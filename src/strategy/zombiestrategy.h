@@ -2,7 +2,7 @@
 #define ZOMBIESTRATEGY_H
 
 #include "strategy.h"
-#include "agent.h"
+#include "../agent.h"
 
 /**
   * @class ZombieStrategy

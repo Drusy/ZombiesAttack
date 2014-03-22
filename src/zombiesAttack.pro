@@ -17,14 +17,14 @@ SOURCES += main.cpp\
     controller.cpp \
     graphicsagent.cpp \
     agent.cpp \
-    strategy.cpp \
-    humanstrategy.cpp \
-    zombiestrategy.cpp \
-    hunterstrategy.cpp \
+    strategy/strategy.cpp \
+    strategy/humanstrategy.cpp \
+    strategy/zombiestrategy.cpp \
+    strategy/hunterstrategy.cpp \
     graphicsshot.cpp \
-    hunterzombiestrategy.cpp \
-    humanbuilderstrategy.cpp \
-    block.cpp \
+    strategy/hunterzombiestrategy.cpp \
+    strategy/humanbuilderstrategy.cpp \
+    strategy/block.cpp \
     tests/agenttest.cpp \
     tests/modeltest.cpp \
     poolagent.cpp
@@ -34,14 +34,14 @@ HEADERS  += view.h \
     controller.h \
     graphicsagent.h \
     agent.h \
-    strategy.h \
-    humanstrategy.h \
-    zombiestrategy.h \
-    hunterstrategy.h \
+    strategy/strategy.h \
+    strategy/humanstrategy.h \
+    strategy/zombiestrategy.h \
+    strategy/hunterstrategy.h \
     graphicsshot.h \
-    hunterzombiestrategy.h \
-    humanbuilderstrategy.h \
-    block.h \
+    strategy/hunterzombiestrategy.h \
+    strategy/humanbuilderstrategy.h \
+    strategy/block.h \
     tests/autotest.h \
     tests/agenttest.h \
     tests/modeltest.h \

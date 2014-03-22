@@ -1,10 +1,10 @@
 #include "view.h"
 #include "ui_view.h"
-#include "humanstrategy.h"
-#include "zombiestrategy.h"
-#include "hunterstrategy.h"
-#include "hunterzombiestrategy.h"
-#include "humanbuilderstrategy.h"
+#include "strategy/humanstrategy.h"
+#include "strategy/zombiestrategy.h"
+#include "strategy/hunterstrategy.h"
+#include "strategy/hunterzombiestrategy.h"
+#include "strategy/humanbuilderstrategy.h"
 
 #include <QGraphicsRectItem>
 #include <QDebug>

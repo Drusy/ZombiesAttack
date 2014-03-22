@@ -1,12 +1,12 @@
 #include "agent.h"
 #include "model.h"
-#include "zombiestrategy.h"
-#include "humanstrategy.h"
-#include "zombiestrategy.h"
-#include "hunterstrategy.h"
-#include "hunterzombiestrategy.h"
-#include "humanbuilderstrategy.h"
-#include "block.h"
+#include "strategy/zombiestrategy.h"
+#include "strategy/humanstrategy.h"
+#include "strategy/zombiestrategy.h"
+#include "strategy/hunterstrategy.h"
+#include "strategy/hunterzombiestrategy.h"
+#include "strategy/humanbuilderstrategy.h"
+#include "strategy/block.h"
 
 #include <QDebug>
 #include <cmath>

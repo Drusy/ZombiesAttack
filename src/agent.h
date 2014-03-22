@@ -8,7 +8,7 @@
 #include <QRectF>
 #include <QTimer>
 
-#include "strategy.h"
+#include "strategy/strategy.h"
 //#include "controller.h"
 
 #define NB_COLLISION_BUILDER 1500

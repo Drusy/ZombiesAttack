@@ -1,9 +1,9 @@
 #include "controller.h"
 #include "agent.h"
-#include "humanstrategy.h"
-#include "zombiestrategy.h"
-#include "hunterstrategy.h"
-#include "hunterzombiestrategy.h"
+#include "strategy/humanstrategy.h"
+#include "strategy/zombiestrategy.h"
+#include "strategy/hunterstrategy.h"
+#include "strategy/hunterzombiestrategy.h"
 #include "poolagent.h"
 
 #include <QDebug>

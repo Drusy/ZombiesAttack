@@ -1,8 +1,8 @@
 #include "agenttest.h"
-#include "../humanstrategy.h"
-#include "../zombiestrategy.h"
-#include "../hunterzombiestrategy.h"
-#include "../hunterstrategy.h"
+#include "../strategy/humanstrategy.h"
+#include "../strategy/zombiestrategy.h"
+#include "../strategy/hunterzombiestrategy.h"
+#include "../strategy/hunterstrategy.h"
 #include "../agent.h"
 
 void AgentTest::initTestCase()
