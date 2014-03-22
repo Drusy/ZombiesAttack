@@ -7,7 +7,7 @@
 #include <QGraphicsScene>
 #include <QMap>
 
-#include "graphicsagent.h"
+#include "../graphicsagent.h"
 #include "agent.h"
 
 /**

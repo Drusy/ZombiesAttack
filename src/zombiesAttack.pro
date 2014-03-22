@@ -13,10 +13,10 @@ QMAKE_CXXFLAGS = -D_USE_MATH_DEFINES
 
 SOURCES += main.cpp\
         view.cpp \
-    model.cpp \
+    model/model.cpp \
     controller.cpp \
     graphicsagent.cpp \
-    agent.cpp \
+    model/agent.cpp \
     strategy/strategy.cpp \
     strategy/humanstrategy.cpp \
     strategy/zombiestrategy.cpp \
@@ -27,13 +27,13 @@ SOURCES += main.cpp\
     strategy/block.cpp \
     tests/agenttest.cpp \
     tests/modeltest.cpp \
-    poolagent.cpp
+    model/poolagent.cpp
 
 HEADERS  += view.h \
-    model.h \
+    model/model.h \
     controller.h \
     graphicsagent.h \
-    agent.h \
+    model/agent.h \
     strategy/strategy.h \
     strategy/humanstrategy.h \
     strategy/zombiestrategy.h \
@@ -45,7 +45,7 @@ HEADERS  += view.h \
     tests/autotest.h \
     tests/agenttest.h \
     tests/modeltest.h \
-    poolagent.h
+    model/poolagent.h
 
 FORMS    += view.ui
 

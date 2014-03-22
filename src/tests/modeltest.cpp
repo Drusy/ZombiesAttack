@@ -1,6 +1,6 @@
 #include "modeltest.h"
-#include "../model.h"
-#include "../agent.h"
+#include "../model/model.h"
+#include "../model/agent.h"
 
 void ModelTest::initTestCase()
 {

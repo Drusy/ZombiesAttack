@@ -4,7 +4,7 @@
 #include <QTimer>
 
 #include "strategy.h"
-#include "../agent.h"
+#include "../model/agent.h"
 
 /**
   * @class HunterStrategy

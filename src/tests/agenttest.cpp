@@ -3,7 +3,7 @@
 #include "../strategy/zombiestrategy.h"
 #include "../strategy/hunterzombiestrategy.h"
 #include "../strategy/hunterstrategy.h"
-#include "../agent.h"
+#include "../model/agent.h"
 
 void AgentTest::initTestCase()
 {

@@ -1,5 +1,5 @@
 #include "strategy.h"
-#include "../agent.h"
+#include "../model/agent.h"
 
 Strategy::Strategy():
     _count(0)

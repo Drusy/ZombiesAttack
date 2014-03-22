@@ -2,7 +2,7 @@
 #define HUMANSTRATEGY_H
 
 #include "strategy.h"
-#include "../agent.h"
+#include "../model/agent.h"
 
 /**
   * @class HumanStrategy

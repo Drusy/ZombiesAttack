@@ -1,10 +1,10 @@
 #include "controller.h"
-#include "agent.h"
+#include "model/agent.h"
 #include "strategy/humanstrategy.h"
 #include "strategy/zombiestrategy.h"
 #include "strategy/hunterstrategy.h"
 #include "strategy/hunterzombiestrategy.h"
-#include "poolagent.h"
+#include "model/poolagent.h"
 
 #include <QDebug>
 #include <cmath>

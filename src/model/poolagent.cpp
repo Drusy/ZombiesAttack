@@ -1,5 +1,5 @@
 #include "poolagent.h"
-#include "strategy/humanstrategy.h"
+#include "../strategy/humanstrategy.h"
 
 PoolAgent* PoolAgent::_instance = NULL;
 

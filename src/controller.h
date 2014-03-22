@@ -4,7 +4,7 @@
 #include <QObject>
 #include <QThread>
 #include <QVector>
-#include "model.h"
+#include "model/model.h"
 #include "view.h"
 #include "strategy/strategy.h"
 
