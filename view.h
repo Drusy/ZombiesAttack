@@ -132,6 +132,10 @@ private slots:
     void on_restartButton_clicked();
 
 private:
+    void resetPopulationDisplay();
+    void connectCounterDisplay();
+    void disconnectCounterDisplay();
+
     /// GUI
     Ui::View *ui;
     /// Model of the MVC

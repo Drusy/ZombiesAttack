@@ -26,3 +26,9 @@ unsigned Strategy::count()
 {
     return _count;
 }
+
+void Strategy::resetCounter()
+{
+    _count = 0;
+    emit popChanged();
+}

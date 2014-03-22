@@ -78,6 +78,11 @@ public:
       */
     virtual QString toString() = 0;
 
+    /**
+     * @brief Reset the strategy counter
+     */
+    void resetCounter();
+
 protected:
     /// Color of the agent
     QColor _color;

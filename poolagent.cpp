@@ -5,7 +5,6 @@ PoolAgent* PoolAgent::_instance = NULL;
 
 PoolAgent::PoolAgent(int nombre)
 {
-    //préalloc
     for(int i = 0 ; i < nombre ; ++i)
     {
         _listAgent.append(new Agent());

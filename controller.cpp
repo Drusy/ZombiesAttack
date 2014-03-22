@@ -43,9 +43,6 @@ void Controller::create(unsigned number, StrategyEnum strategy, int x, int y)
         //agent = new Agent(strategy);
         agent = PoolAgent::instance(POOL_SIZE)->newAgent(strategy);
 
-        //use of a pool
-
-
         connect(agent, SIGNAL(deadAgent(Agent*)), this, SLOT(onDeadAgent(Agent*)));
         connect(agent, SIGNAL(agentContaminated(Agent*)), _view, SLOT(onAgentContaminated(Agent*)));
         connect(agent, SIGNAL(createAgentSig(uint,StrategyEnum,int,int)), this, SLOT(create(uint,StrategyEnum,int,int)));

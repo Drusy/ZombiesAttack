@@ -28,11 +28,6 @@ View::View(Model *model) :
     show();
     resizeEvent(0);
 
-    QObject::connect(HumanStrategy::instance(), SIGNAL(popChanged()), this, SLOT(onPopChanged()));
-    QObject::connect(ZombieStrategy::instance(), SIGNAL(popChanged()), this, SLOT(onPopChanged()));
-    QObject::connect(HunterStrategy::instance(), SIGNAL(popChanged()), this, SLOT(onPopChanged()));
-    QObject::connect(HunterZombieStrategy::instance(), SIGNAL(popChanged()), this, SLOT(onPopChanged()));
-
     _timer.setSingleShot(true);
     QObject::connect(&_timer, SIGNAL(timeout()), this, SLOT(onTimerOut()));
 }
@@ -44,6 +39,22 @@ void View::onPopChanged()
     ui->zombiesNumber->setText(QString::number(ZombieStrategy::instance()->count()
                                                + HunterZombieStrategy::instance()->count()));
     ui->huntersNumber->setText(QString::number(HunterStrategy::instance()->count()));
+}
+
+void View::connectCounterDisplay()
+{
+    QObject::connect(HumanStrategy::instance(), SIGNAL(popChanged()), this, SLOT(onPopChanged()));
+    QObject::connect(ZombieStrategy::instance(), SIGNAL(popChanged()), this, SLOT(onPopChanged()));
+    QObject::connect(HunterStrategy::instance(), SIGNAL(popChanged()), this, SLOT(onPopChanged()));
+    QObject::connect(HunterZombieStrategy::instance(), SIGNAL(popChanged()), this, SLOT(onPopChanged()));
+}
+
+void View::disconnectCounterDisplay()
+{
+    QObject::disconnect(HumanStrategy::instance(), SIGNAL(popChanged()), this, SLOT(onPopChanged()));
+    QObject::disconnect(ZombieStrategy::instance(), SIGNAL(popChanged()), this, SLOT(onPopChanged()));
+    QObject::disconnect(HunterStrategy::instance(), SIGNAL(popChanged()), this, SLOT(onPopChanged()));
+    QObject::disconnect(HunterZombieStrategy::instance(), SIGNAL(popChanged()), this, SLOT(onPopChanged()));
 }
 
 void View::resizeEvent (QResizeEvent * event)
@@ -110,6 +121,8 @@ void View::on_startButton_clicked()
     ui->stopButton->setVisible(true);
     ui->pauseButton->setVisible(true);
 
+    connectCounterDisplay();
+
     emit start(ui->humansBasePop->value(),
                ui->zombiesBasePop->value(),
                ui->huntersBasePop->value());
@@ -124,9 +137,17 @@ void View::on_stopButton_clicked()
     ui->pauseButton->setVisible(false);
     ui->restartButton->setVisible(false);
 
-    clear();
-
+    disconnectCounterDisplay();
     emit stop();
+    clear();
+    resetPopulationDisplay();
+}
+
+void View::resetPopulationDisplay()
+{
+    ui->humansNumber->setText(QString::number(0));
+    ui->zombiesNumber->setText(QString::number(0));
+    ui->huntersNumber->setText(QString::number(0));
 }
 
 void View::clear()
