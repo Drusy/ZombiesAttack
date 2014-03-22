@@ -1,4 +1,0 @@
-> Pool [Both]
-> QUnit [Both]
-> UML [Both]
-> Rapport [Both]

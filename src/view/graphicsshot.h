@@ -4,7 +4,7 @@
 #include <QGraphicsItem>
 #include <QTimer>
 
-#include "model/agent.h"
+#include "../model/agent.h"
 
 class GraphicsAgent;
 

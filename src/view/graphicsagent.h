@@ -4,7 +4,7 @@
 #include <QGraphicsItem>
 #include <QSize>
 
-#include "model/agent.h"
+#include "../model/agent.h"
 #include "graphicsshot.h"
 
 /**

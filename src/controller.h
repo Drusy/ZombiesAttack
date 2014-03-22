@@ -5,7 +5,7 @@
 #include <QThread>
 #include <QVector>
 #include "model/model.h"
-#include "view.h"
+#include "view/view.h"
 #include "strategy/strategy.h"
 
 #define POOL_SIZE 90

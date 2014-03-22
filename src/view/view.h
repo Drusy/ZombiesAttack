@@ -7,7 +7,7 @@
 #include <QGraphicsItem>
 #include <QTimer>
 
-#include "model/model.h"
+#include "../model/model.h"
 #include "graphicsagent.h"
 #include "graphicsshot.h"
 
