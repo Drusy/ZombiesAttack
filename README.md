@@ -7,7 +7,7 @@ ZombiesAttack
 
 ### Goal
 In this C++/Qt program, we try to show the consequencies of a possible zombies invasion.
-It's a agent-based simulation in which population protected by hunters try to survice against zombies.
+It's a agent-based simulation in which population protected by hunters try to survive against zombies.
 
 This funny application of the C++ simualtion programming is a good way to work with severals patterns and smart agents oriented objects.
 
